@@ -6,6 +6,15 @@ namespace NewsApplication.Pages;
 
 public partial class NewsPage : ContentPage
 {
+    public NewsPage()
+    {
+        InitializeComponent();
+        ArticlesList = new List<Article>();
+        FilteredCountryList = CountryList;
+        CvCategories.ItemsSource = CategoryList;
+        CvCountries.ItemsSource = CountryList;
+    }
+
     private bool IsNextPage = false;
     //private string SelectedCountryCode = "us";
     //private string SelectedCountryCode = "us";
@@ -61,14 +70,6 @@ public partial class NewsPage : ContentPage
 
 
 };
-    public NewsPage()
-    {
-        InitializeComponent();
-        ArticlesList = new List<Article>();
-        FilteredCountryList = CountryList;
-        CvCategories.ItemsSource = CategoryList;
-        CvCountries.ItemsSource = CountryList;
-    }
 
     //protected override async void OnAppearing()
     //{
@@ -130,18 +131,29 @@ public partial class NewsPage : ContentPage
 
     //}
 
-    private async void CvCategories_SelectionChanged(object sender, SelectionChangedEventArgs e) 
+    private async void CvCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var selectedItem = e.CurrentSelection.FirstOrDefault() as Category;
-        await PassCategory(selectedItem.Name);
+        if (selectedItem != null)
+        {
+            await PassCategory(selectedItem.Name);
+            CvCategories.SelectedItem = null;
+        }
     }
 
-    private void CvNews_SelectedChanged(object sender, SelectionChangedEventArgs e) 
-    {
-        var selectedItem = e.CurrentSelection.FirstOrDefault() as Article;
-        IsNextPage = true;
-        Navigation.PushAsync(new NewsDetailsPage(selectedItem));
-    }
+    //private async void OnHamburgerMenuClicked(object sender, EventArgs e)
+    //{
+    //    var categoryNames = CategoryList.Select(c => c.Name).ToArray();
+    //    var selected = await DisplayActionSheet("Select Category", "Cancel", null, categoryNames);
+
+    //    if (!string.IsNullOrEmpty(selected) && selected != "Cancel")
+    //    {
+    //        await PassCategory(selected);
+    //    }
+    //}
+
+
+
 
 
     private async void CvCountries_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -157,12 +169,58 @@ public partial class NewsPage : ContentPage
     }
 
 
-    private List<Country> FilteredCountryList;
+    //private List<Country> FilteredCountryList;
 
-    private void OnCountrySearchTextChanged(object sender, TextChangedEventArgs e)
+    //private void OnCountrySearchTextChanged(object sender, TextChangedEventArgs e)
+    //{
+    //    var searchText = e.NewTextValue.ToLower();
+
+    //    if (string.IsNullOrWhiteSpace(searchText))
+    //    {
+    //        FilteredCountryList = CountryList;
+    //    }
+    //    else
+    //    {
+    //        FilteredCountryList = CountryList
+    //            .Where(c => c.Name.ToLower().Contains(searchText))
+    //            .ToList();
+    //    }
+
+    //    CvCountries.ItemsSource = FilteredCountryList;
+    //}
+
+
+    //private List<Article> FilteredArticlesList = new List<Article>();
+    //private Article article;
+
+    //private void OnArticleSearchTextChanged(object sender, TextChangedEventArgs e)
+    //{
+    //    var searchText = e.NewTextValue?.ToLower();
+
+    //    if (string.IsNullOrWhiteSpace(searchText))
+    //    {
+    //        FilteredArticlesList = ArticlesList;
+    //    }
+    //    else
+    //    {
+    //        FilteredArticlesList = ArticlesList
+    //            .Where(a =>
+    //                (a.Title?.ToLower().Contains(searchText) ?? false) ||
+    //                (a.Description?.ToLower().Contains(searchText) ?? false))
+    //            .ToList();
+    //    }
+
+    //    CvNews.ItemsSource = FilteredArticlesList;
+    //}
+
+    private List<Country> FilteredCountryList = new List<Country>();
+    private List<Article> FilteredArticlesList = new List<Article>();
+
+    private void OnUnifiedSearchTextChanged(object sender, TextChangedEventArgs e)
     {
-        var searchText = e.NewTextValue.ToLower();
+        var searchText = e.NewTextValue?.ToLower();
 
+        // Filter countries
         if (string.IsNullOrWhiteSpace(searchText))
         {
             FilteredCountryList = CountryList;
@@ -173,19 +231,9 @@ public partial class NewsPage : ContentPage
                 .Where(c => c.Name.ToLower().Contains(searchText))
                 .ToList();
         }
-
         CvCountries.ItemsSource = FilteredCountryList;
-    }
 
-
-    private List<Article> FilteredArticlesList = new List<Article>();
-
-    
-
-    private void OnArticleSearchTextChanged(object sender, TextChangedEventArgs e)
-    {
-        var searchText = e.NewTextValue?.ToLower();
-
+        // Filter articles
         if (string.IsNullOrWhiteSpace(searchText))
         {
             FilteredArticlesList = ArticlesList;
@@ -198,9 +246,39 @@ public partial class NewsPage : ContentPage
                     (a.Description?.ToLower().Contains(searchText) ?? false))
                 .ToList();
         }
-
         CvNews.ItemsSource = FilteredArticlesList;
     }
+
+
+
+    private async void CvNews_SelectedChanged(object sender, SelectionChangedEventArgs e)
+    {
+        var selectedItem = e.CurrentSelection.FirstOrDefault() as Article;
+        if (selectedItem != null)
+        {
+            IsNextPage = true;
+            //await Navigation.PushAsync(new NewsDetailsPage(selectedItem));
+
+            await Navigation.PushAsync(new NewsDetailsPage(selectedItem));
+
+            //Application.Current.MainPage = new NewsDetailsPage(selectedItem);
+            CvNews.SelectedItem = null;
+        }
+        //IsNextPage = true;
+        //await Navigation.PushAsync(new NewsDetailsPage(selectedItem));
+    }
+
+
+    
+
+
+
+
+    private async void OnLoginClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new LoginPage());
+    }
+
 
 
 

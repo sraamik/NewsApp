@@ -1,0 +1,6 @@
+C:\Users\VijayKumarDevi\source\repos\NewsApplication\NewsApplication\obj\Debug\net8.0\NewsApplication.csproj.AssemblyReference.cache
+C:\Users\VijayKumarDevi\source\repos\NewsApplication\NewsApplication\obj\Debug\net8.0\NewsApplication.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\VijayKumarDevi\source\repos\NewsApplication\NewsApplication\obj\Debug\net8.0\NewsApplication.AssemblyInfoInputs.cache
+C:\Users\VijayKumarDevi\source\repos\NewsApplication\NewsApplication\obj\Debug\net8.0\NewsApplication.AssemblyInfo.cs
+C:\Users\VijayKumarDevi\source\repos\NewsApplication\NewsApplication\obj\Debug\net8.0\NewsApplication.csproj.CoreCompileInputs.cache
+C:\Users\VijayKumarDevi\source\repos\NewsApplication\NewsApplication\obj\Debug\net8.0\NewsApplication.sourcelink.json

@@ -18,7 +18,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NewsApplication")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+80a6543946054e0428afebd173caa49b3f91ad98")]
 [assembly: System.Reflection.AssemblyProductAttribute("NewsApplication")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NewsApplication")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

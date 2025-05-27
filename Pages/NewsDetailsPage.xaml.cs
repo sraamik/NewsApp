@@ -1,10 +1,12 @@
-using NewsApplication.Models;
+﻿using NewsApplication.Models;
 
 namespace NewsApplication.Pages;
 
 public partial class NewsDetailsPage : ContentPage
 {
     private string uri;
+    private Article article;
+
     public NewsDetailsPage(Article article)
 	{
 		InitializeComponent();
@@ -21,13 +23,29 @@ public partial class NewsDetailsPage : ContentPage
 
             await Share.RequestAsync(new ShareTextRequest
             {
-                Uri = uri,
+                Text = uri,
                 Title = "Share"
             });
+            //await Navigation.PushAsync(new NewsDetailsPage(article));
+
+            await DisplayAlert("Shared", "The article was shared successfully.", "OK");
+
+
+            await Navigation.PopAsync();
+
+            
         }
 
+       
 
-           
+
+
 
     }
+
+    private async void Back_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
+    }
+
 }

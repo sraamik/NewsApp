@@ -2,30 +2,50 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NewsApplication.Pages.NewsDetailsPage"
-             BackgroundColor="#FDF6E3">
+             Title="News Details"
+             BackgroundColor="#FDF6E3" NavigationPage.HasNavigationBar="False">
 
-    <ContentPage.ToolbarItems>
-        <!-- Ensure share.svg exists in Resources/Images with Build Action: MauiImage -->
-        <ToolbarItem IconImageSource="share.svc"
-                     Order="Primary"
-                     Text="Share"
-                     Clicked="TbShare_Clicked"/>
-    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="Auto,Auto,Auto,*">
 
-    <Grid RowDefinitions="Auto,Auto,*">
-        <Image Grid.Row="0" x:Name="ImgNews" HeightRequest="300" Aspect="AspectFill" />
-        <Label Grid.Row="1"
+        <ImageButton Grid.Row="0"
+                     Source="back.png"
+                     Clicked="Back_Clicked"
+                     HorizontalOptions="Start"
+                     VerticalOptions="Start"
+                     Margin="10"
+                     Padding="2"
+                     BackgroundColor="Black"
+                     HeightRequest="33"
+                     WidthRequest="33"
+                     CornerRadius="16"/>
+
+        <ImageButton Grid.Row="0"
+                     Source="share.png"
+                     Clicked="TbShare_Clicked"
+                     HorizontalOptions="End"
+                     VerticalOptions="Start"
+                     Margin="10"
+                     Padding="2"
+                     BackgroundColor="Black"
+                     HeightRequest="33"
+                     WidthRequest="33"
+                     CornerRadius="16"/>
+
+        <Image Grid.Row="1" x:Name="ImgNews" HeightRequest="200" Aspect="AspectFill" />
+        <Label Grid.Row="2"
                x:Name="LblTitle"
-               Margin="8"
-               FontSize="20"
+               Margin="10"
+               FontSize="Title"
                FontAttributes="Bold,Italic"
                TextDecorations="Underline" />
-        <Label Grid.Row="2"
+        <Label Grid.Row="3"
                x:Name="LblContent"
-               Margin="8"
-               FontSize="16"
+               Margin="10"
+               FontSize="Body"
                LineBreakMode="WordWrap"
                TextColor="Black" />
+
+        
     </Grid>
 
 </ContentPage>
